@@ -1,0 +1,92 @@
+---
+layout: layouts/base.njk
+title: Colors
+description: Color palette and usage guidelines
+breadcrumbs:
+  - label: Home
+    url: /
+  - label: Colors
+    url: /colors
+category: Design System
+---
+
+## Color Palette
+
+Our color system is built on Web Awesome's color system, providing a comprehensive palette for all our design needs.
+
+## Primary Colors
+
+<div class="component-showcase">
+  <h3>Primary Palette</h3>
+  <p>The primary color palette is used for main actions, links, and brand elements.</p>
+  
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin: 1rem 0;">
+    <div style="background: var(--wa-color-primary-50); padding: 1rem; border-radius: var(--wa-border-radius-medium);">
+      <strong>Primary 50</strong>
+      <div style="font-size: 0.875rem; color: var(--wa-color-neutral-600);">Lightest</div>
+    </div>
+    <div style="background: var(--wa-color-primary-500); color: white; padding: 1rem; border-radius: var(--wa-border-radius-medium);">
+      <strong>Primary 500</strong>
+      <div style="font-size: 0.875rem; opacity: 0.9;">Base</div>
+    </div>
+    <div style="background: var(--wa-color-primary-900); color: white; padding: 1rem; border-radius: var(--wa-border-radius-medium);">
+      <strong>Primary 900</strong>
+      <div style="font-size: 0.875rem; opacity: 0.9;">Darkest</div>
+    </div>
+  </div>
+</div>
+
+## Neutral Colors
+
+<div class="component-showcase">
+  <h3>Neutral Palette</h3>
+  <p>Neutral colors are used for text, backgrounds, and borders.</p>
+  
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1rem; margin: 1rem 0;">
+    <div style="background: var(--wa-color-neutral-0); border: 1px solid var(--wa-color-neutral-200); padding: 1rem; border-radius: var(--wa-border-radius-medium);">
+      <strong>Neutral 0</strong>
+      <div style="font-size: 0.875rem; color: var(--wa-color-neutral-600);">White</div>
+    </div>
+    <div style="background: var(--wa-color-neutral-500); color: white; padding: 1rem; border-radius: var(--wa-border-radius-medium);">
+      <strong>Neutral 500</strong>
+      <div style="font-size: 0.875rem; opacity: 0.9;">Mid</div>
+    </div>
+    <div style="background: var(--wa-color-neutral-900); color: white; padding: 1rem; border-radius: var(--wa-border-radius-medium);">
+      <strong>Neutral 900</strong>
+      <div style="font-size: 0.875rem; opacity: 0.9;">Black</div>
+    </div>
+  </div>
+</div>
+
+## Semantic Colors
+
+Our design system includes semantic colors for different states and messages:
+
+- **Success**: Used for positive actions and success messages
+- **Warning**: Used for warnings and cautionary messages
+- **Danger**: Used for errors and destructive actions
+- **Info**: Used for informational messages
+
+## Usage Guidelines
+
+1. **Primary colors** should be used sparingly for emphasis and calls to action
+2. **Neutral colors** form the foundation of most designs
+3. **Semantic colors** should be used consistently for their intended purposes
+4. Always ensure sufficient contrast for accessibility
+
+## CSS Variables
+
+All colors are available as CSS variables:
+
+```css
+/* Primary colors */
+--wa-color-primary-50
+--wa-color-primary-500
+--wa-color-primary-900
+
+/* Neutral colors */
+--wa-color-neutral-0
+--wa-color-neutral-500
+--wa-color-neutral-900
+```
+

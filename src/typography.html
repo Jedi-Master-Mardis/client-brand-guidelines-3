@@ -1,0 +1,90 @@
+---
+layout: layouts/base.njk
+title: Typography
+description: Typography guidelines and text styles
+breadcrumbs:
+  - label: Home
+    url: /
+  - label: Typography
+    url: /typography
+category: Design System
+---
+
+## Typography System
+
+Our typography system provides a consistent hierarchy and readable text across all platforms.
+
+## Font Families
+
+We use system fonts for optimal performance and cross-platform consistency:
+
+```css
+font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+```
+
+## Type Scale
+
+Our type scale follows a harmonious progression:
+
+<div class="component-showcase">
+  <h1 style="margin-top: 0;">Heading 1 - 2.5rem / 40px</h1>
+  <h2>Heading 2 - 1.875rem / 30px</h2>
+  <h3>Heading 3 - 1.5rem / 24px</h3>
+  <h4>Heading 4 - 1.25rem / 20px</h4>
+  <p><strong>Body Text - 1rem / 16px</strong></p>
+  <p style="font-size: 0.875rem;"><strong>Small Text - 0.875rem / 14px</strong></p>
+</div>
+
+## Text Styles
+
+### Headings
+
+Headings provide structure and hierarchy to your content:
+
+```html
+<h1>Main Page Title</h1>
+<h2>Section Heading</h2>
+<h3>Subsection Heading</h3>
+<h4>Minor Heading</h4>
+```
+
+### Body Text
+
+Body text should be readable and comfortable:
+
+```html
+<p>This is body text. It should be easy to read and provide good contrast against the background.</p>
+```
+
+### Emphasis
+
+Use emphasis sparingly to highlight important information:
+
+```html
+<p>This is <strong>bold text</strong> and this is <em>italic text</em>.</p>
+```
+
+## Line Height
+
+We use a line height of 1.6 for body text to ensure readability:
+
+```css
+line-height: 1.6;
+```
+
+## Color
+
+Text colors follow our color system:
+
+- **Primary text**: `var(--wa-color-neutral-900)`
+- **Secondary text**: `var(--wa-color-neutral-700)`
+- **Muted text**: `var(--wa-color-neutral-600)`
+
+## Best Practices
+
+1. Use headings in order (h1 → h2 → h3) to maintain hierarchy
+2. Keep paragraphs concise and scannable
+3. Use bold and italic sparingly for emphasis
+4. Ensure sufficient contrast for accessibility
+5. Maintain consistent spacing between elements
+

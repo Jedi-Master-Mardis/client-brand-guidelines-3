@@ -1,0 +1,108 @@
+---
+layout: layouts/base.njk
+title: Components
+description: Reusable UI components built with Web Awesome
+breadcrumbs:
+  - label: Home
+    url: /
+  - label: Components
+    url: /components
+category: Design System
+---
+
+## Component Library
+
+Our component library is built on Web Awesome, providing a comprehensive set of accessible and customizable UI components.
+
+## Buttons
+
+Buttons are used for actions and navigation:
+
+<div class="component-showcase">
+  <h3>Button Variants</h3>
+  <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 1rem 0;">
+    <wa-button variant="primary">Primary</wa-button>
+    <wa-button variant="default">Default</wa-button>
+    <wa-button variant="success">Success</wa-button>
+    <wa-button variant="warning">Warning</wa-button>
+    <wa-button variant="danger">Danger</wa-button>
+  </div>
+  
+  <h4>Outline Buttons</h4>
+  <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 1rem 0;">
+    <wa-button variant="primary" outline>Primary</wa-button>
+    <wa-button variant="default" outline>Default</wa-button>
+    <wa-button variant="success" outline>Success</wa-button>
+  </div>
+</div>
+
+## Cards
+
+Cards are used to group related content:
+
+<div class="component-showcase">
+  <h3>Card Component</h3>
+  <wa-card style="max-width: 400px;">
+    <h3 style="margin-top: 0;">Card Title</h3>
+    <p>This is a card component. It can contain any content you need.</p>
+    <wa-button variant="primary" slot="footer">Action</wa-button>
+  </wa-card>
+</div>
+
+## Badges
+
+Badges are used for labels and status indicators:
+
+<div class="component-showcase">
+  <h3>Badge Variants</h3>
+  <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 1rem 0;">
+    <wa-badge variant="primary">Primary</wa-badge>
+    <wa-badge variant="success">Success</wa-badge>
+    <wa-badge variant="warning">Warning</wa-badge>
+    <wa-badge variant="danger">Danger</wa-badge>
+    <wa-badge variant="neutral">Neutral</wa-badge>
+  </div>
+</div>
+
+## Inputs
+
+Form inputs for user data collection:
+
+<div class="component-showcase">
+  <h3>Input Components</h3>
+  <div style="display: flex; flex-direction: column; gap: 1rem; max-width: 400px;">
+    <wa-input label="Text Input" placeholder="Enter text"></wa-input>
+    <wa-textarea label="Textarea" placeholder="Enter multiple lines"></wa-textarea>
+    <wa-select label="Select">
+      <wa-option value="option1">Option 1</wa-option>
+      <wa-option value="option2">Option 2</wa-option>
+      <wa-option value="option3">Option 3</wa-option>
+    </wa-select>
+  </div>
+</div>
+
+## Navigation Components
+
+Components for navigation and menus:
+
+<div class="component-showcase">
+  <h3>Breadcrumbs</h3>
+  <wa-breadcrumb>
+    <wa-breadcrumb-item href="/">Home</wa-breadcrumb-item>
+    <wa-breadcrumb-item href="/components">Components</wa-breadcrumb-item>
+  </wa-breadcrumb>
+</div>
+
+## More Components
+
+Web Awesome provides many more components including:
+
+- Dialogs and Modals
+- Dropdowns and Menus
+- Tabs and Tab Groups
+- Progress Indicators
+- Tooltips
+- And many more...
+
+Visit the [Web Awesome documentation](https://webawesome.com) for a complete list of available components.
+

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if title %}{{ title }} | {% endif %}Brand Guidelines</title>
+  <meta name="description" content="{{ description or 'Brand guidelines documentation' }}">
+  
+  <!-- Web Awesome CSS -->
+  <link rel="stylesheet" href="/webawesome/styles/webawesome.css">
+  
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <div class="header-content">
+        <a href="/" class="logo">
+          <strong>Brand Guidelines</strong>
+        </a>
+        <nav class="main-nav">
+          <wa-dropdown>
+            <wa-button slot="trigger" caret>Our Work</wa-button>
+            <wa-dropdown-item>Habitat Restoration</wa-dropdown-item>
+            <wa-dropdown-item>Migration Science</wa-dropdown-item>
+            <wa-dropdown-item>Advocacy</wa-dropdown-item>
+          </wa-dropdown>
+          <wa-dropdown>
+            <wa-button slot="trigger" caret>About Us</wa-button>
+            <wa-dropdown-item>Our History</wa-dropdown-item>
+            <wa-dropdown-item>Leadership</wa-dropdown-item>
+            <wa-dropdown-item>Fiscal Reports</wa-dropdown-item>
+          </wa-dropdown>
+          <wa-dropdown>
+            <wa-button slot="trigger" caret>Discover</wa-button>
+            <wa-dropdown-item>Field Guides</wa-dropdown-item>
+            <wa-dropdown-item>Photo Search</wa-dropdown-item>
+            <wa-dropdown-item>Gear and Resources</wa-dropdown-item>
+          </wa-dropdown>
+          <wa-dropdown>
+            <wa-button slot="trigger" caret>Get Involved</wa-button>
+            <wa-dropdown-item>Adopt a Bird</wa-dropdown-item>
+            <wa-dropdown-item>Your Local Chapter</wa-dropdown-item>
+            <wa-dropdown-item>Youth Programs</wa-dropdown-item>
+            <wa-dropdown-item>Camps</wa-dropdown-item>
+          </wa-dropdown>
+        </nav>
+        <div class="header-actions">
+          <wa-button variant="default" outline>Find Your Local Chapter</wa-button>
+          <wa-button variant="primary">Donate</wa-button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="content-container">
+      <!-- Sidebar Navigation -->
+      <aside class="sidebar">
+        <nav class="sidebar-nav">
+          <wa-tree>
+            <wa-tree-item>
+              <a href="/">Home</a>
+            </wa-tree-item>
+            <wa-tree-item>
+              <a href="/getting-started">Getting Started</a>
+            </wa-tree-item>
+            <wa-tree-item>
+              <a href="/colors">Colors</a>
+            </wa-tree-item>
+            <wa-tree-item>
+              <a href="/typography">Typography</a>
+            </wa-tree-item>
+            <wa-tree-item>
+              <a href="/components">Components</a>
+            </wa-tree-item>
+            <wa-tree-item>
+              <a href="/examples">Examples</a>
+            </wa-tree-item>
+          </wa-tree>
+        </nav>
+      </aside>
+
+      <!-- Page Content -->
+      <article class="page-content">
+        {% if breadcrumbs %}
+        <wa-breadcrumb>
+          {% for crumb in breadcrumbs %}
+          <wa-breadcrumb-item href="{{ crumb.url }}">{{ crumb.label }}</wa-breadcrumb-item>
+          {% endfor %}
+        </wa-breadcrumb>
+        {% endif %}
+
+        <div class="page-header">
+          {% if category %}
+          <div class="page-category">{{ category }}</div>
+          {% endif %}
+          <h1>{{ title or pageTitle or "Page Title" }}</h1>
+          {% if subtitle %}
+          <p class="page-subtitle">{{ subtitle }}</p>
+          {% endif %}
+        </div>
+
+        {{ content | safe }}
+      </article>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Brand Guidelines</h3>
+          <p>Comprehensive brand guidelines and design system documentation.</p>
+        </div>
+        <div class="footer-section">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="/getting-started">Getting Started</a></li>
+            <li><a href="/colors">Colors</a></li>
+            <li><a href="/typography">Typography</a></li>
+            <li><a href="/components">Components</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/faq">FAQ</a></li>
+            <li><a href="/updates">Updates</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; {{ "" | year }} Brand Guidelines. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Web Awesome JavaScript -->
+  <script type="module" src="/webawesome/webawesome.loader.js" data-webawesome="/webawesome"></script>
+  
+  <!-- Custom JavaScript -->
+  <script type="module" src="/assets/js/main.js"></script>
+</body>
+</html>
+

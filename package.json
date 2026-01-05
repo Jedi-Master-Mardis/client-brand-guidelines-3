@@ -1,0 +1,22 @@
+{
+  "name": "client-brand-guidelines",
+  "version": "1.0.0",
+  "description": "Brand guidelines documentation site built with 11ty and Web Awesome",
+  "scripts": {
+    "build": "eleventy",
+    "serve": "eleventy --serve",
+    "start": "eleventy --serve"
+  },
+  "keywords": [
+    "eleventy",
+    "11ty",
+    "documentation",
+    "webawesome"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.1"
+  }
+}
+
