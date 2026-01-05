@@ -61,24 +61,124 @@
       <!-- Sidebar Navigation -->
       <aside class="sidebar">
         <nav class="sidebar-nav">
-          <wa-tree>
+          <wa-tree selection="single">
+            <!-- 1. Introduction -->
             <wa-tree-item>
-              <a href="/">Home</a>
+              <a href="/introduction">Introduction</a>
+              <wa-tree-item>
+                <a href="/introduction/purpose">Purpose of the Guidelines</a>
+              </wa-tree-item>
+              <wa-tree-item>
+                <a href="/introduction/brand-overview">Brand Overview</a>
+              </wa-tree-item>
             </wa-tree-item>
+            
+            <!-- 2. Brand -->
             <wa-tree-item>
-              <a href="/getting-started">Getting Started</a>
+              <a href="/brand">Brand</a>
+              <wa-tree-item>
+                <a href="/brand/logo-usage">Logo Usage</a>
+                <wa-tree-item>Primary Logo</wa-tree-item>
+                <wa-tree-item>Secondary Logos</wa-tree-item>
+                <wa-tree-item>Clear Space and Sizing</wa-tree-item>
+                <wa-tree-item>Do's and Don'ts</wa-tree-item>
+              </wa-tree-item>
+              <wa-tree-item>
+                <a href="/brand/color-palette">Color Palette</a>
+                <wa-tree-item>Primary Colors</wa-tree-item>
+                <wa-tree-item>Secondary Colors</wa-tree-item>
+                <wa-tree-item>Color Codes (Pantone, HEX, RGB, CMYK)</wa-tree-item>
+              </wa-tree-item>
+              <wa-tree-item>
+                <a href="/brand/typography">Typography</a>
+                <wa-tree-item>Primary Typeface</wa-tree-item>
+                <wa-tree-item>Secondary Typeface</wa-tree-item>
+                <wa-tree-item>Font Weights and Styles</wa-tree-item>
+                <wa-tree-item>Usage Guidelines</wa-tree-item>
+              </wa-tree-item>
             </wa-tree-item>
+            
+            <!-- 3. Voice -->
             <wa-tree-item>
-              <a href="/colors">Colors</a>
+              <a href="/voice">Voice</a>
+              <wa-tree-item>
+                <a href="/voice/brand-voice-principles">Brand Voice Principles</a>
+              </wa-tree-item>
+              <wa-tree-item>
+                <a href="/voice/writing-style-guide">Writing Style Guide</a>
+              </wa-tree-item>
+              <wa-tree-item>
+                <a href="/voice/key-messaging">Key Messaging</a>
+              </wa-tree-item>
             </wa-tree-item>
+            
+            <!-- 4. Visual -->
             <wa-tree-item>
-              <a href="/typography">Typography</a>
+              <a href="/visual">Visual</a>
+              <wa-tree-item>
+                <a href="/visual/imagery-guidelines">Imagery Guidelines</a>
+                <wa-tree-item>Photography Style</wa-tree-item>
+                <wa-tree-item>Illustration Style</wa-tree-item>
+              </wa-tree-item>
+              <wa-tree-item>
+                <a href="/visual/iconography">Iconography</a>
+              </wa-tree-item>
+              <wa-tree-item>
+                <a href="/visual/patterns-textures">Patterns and Textures</a>
+              </wa-tree-item>
             </wa-tree-item>
+            
+            <!-- 5. Application -->
             <wa-tree-item>
-              <a href="/components">Components</a>
+              <a href="/application">Application</a>
+              <wa-tree-item>
+                <a href="/application/digital-media">Digital Media</a>
+                <wa-tree-item>Website Design</wa-tree-item>
+                <wa-tree-item>Social Media</wa-tree-item>
+                <wa-tree-item>Email Templates</wa-tree-item>
+              </wa-tree-item>
+              <wa-tree-item>
+                <a href="/application/print-media">Print Media</a>
+                <wa-tree-item>Business Cards</wa-tree-item>
+                <wa-tree-item>Brochures</wa-tree-item>
+                <wa-tree-item>Packaging</wa-tree-item>
+              </wa-tree-item>
+              <wa-tree-item>
+                <a href="/application/advertising">Advertising</a>
+                <wa-tree-item>Digital Ads</wa-tree-item>
+                <wa-tree-item>Print Ads</wa-tree-item>
+                <wa-tree-item>Billboards</wa-tree-item>
+              </wa-tree-item>
             </wa-tree-item>
+            
+            <!-- 6. Changelog -->
             <wa-tree-item>
-              <a href="/examples">Examples</a>
+              <a href="/changelog">Changelog</a>
+            </wa-tree-item>
+            
+            <!-- 7. Download -->
+            <wa-tree-item>
+              <a href="/download">Download</a>
+              <wa-tree-item>
+                <a href="/download/logo-files">Logo Files (Vector, PNG, JPG)</a>
+              </wa-tree-item>
+              <wa-tree-item>
+                <a href="/download/color-swatches">Color Swatches</a>
+              </wa-tree-item>
+              <wa-tree-item>
+                <a href="/download/typography-files">Typography Files</a>
+              </wa-tree-item>
+              <wa-tree-item>
+                <a href="/download/templates">Templates (e.g., PowerPoint, Letterhead)</a>
+              </wa-tree-item>
+            </wa-tree-item>
+            
+            <!-- 8. Contact -->
+            <wa-tree-item>
+              <a href="/contact">Contact</a>
+              <wa-tree-item>
+                <a href="/contact/brand-team">Brand Team Contact Info</a>
+              </wa-tree-item>
             </wa-tree-item>
           </wa-tree>
         </nav>
@@ -95,16 +195,15 @@
         {% endif %}
 
         <div class="page-header">
-          {% if category %}
-          <div class="page-category">{{ category }}</div>
-          {% endif %}
           <h1>{{ title or pageTitle or "Page Title" }}</h1>
           {% if subtitle %}
           <p class="page-subtitle">{{ subtitle }}</p>
           {% endif %}
         </div>
 
-        {{ content | safe }}
+        {% if content %}
+          {{ content | markdown | safe }}
+        {% endif %}
       </article>
     </div>
   </main>

@@ -98,6 +98,10 @@ body {
 
 .sidebar-nav wa-tree {
   display: block;
+  --indent-guide-width: 1px;
+  --indent-guide-color: var(--wa-color-neutral-300);
+  --indent-guide-style: solid;
+  --indent-guide-offset: 0.5rem;
 }
 
 .sidebar-nav wa-tree-item a {
