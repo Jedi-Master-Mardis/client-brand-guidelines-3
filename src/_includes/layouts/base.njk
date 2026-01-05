@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="wa-cloak">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,39 +18,15 @@
     <div class="header-container">
       <div class="header-content">
         <a href="/" class="logo">
-          <strong>Brand Guidelines</strong>
+          <strong>Moffitt Brand Guidelines</strong>
         </a>
-        <nav class="main-nav">
-          <wa-dropdown>
-            <wa-button slot="trigger" caret>Our Work</wa-button>
-            <wa-dropdown-item>Habitat Restoration</wa-dropdown-item>
-            <wa-dropdown-item>Migration Science</wa-dropdown-item>
-            <wa-dropdown-item>Advocacy</wa-dropdown-item>
-          </wa-dropdown>
-          <wa-dropdown>
-            <wa-button slot="trigger" caret>About Us</wa-button>
-            <wa-dropdown-item>Our History</wa-dropdown-item>
-            <wa-dropdown-item>Leadership</wa-dropdown-item>
-            <wa-dropdown-item>Fiscal Reports</wa-dropdown-item>
-          </wa-dropdown>
-          <wa-dropdown>
-            <wa-button slot="trigger" caret>Discover</wa-button>
-            <wa-dropdown-item>Field Guides</wa-dropdown-item>
-            <wa-dropdown-item>Photo Search</wa-dropdown-item>
-            <wa-dropdown-item>Gear and Resources</wa-dropdown-item>
-          </wa-dropdown>
-          <wa-dropdown>
-            <wa-button slot="trigger" caret>Get Involved</wa-button>
-            <wa-dropdown-item>Adopt a Bird</wa-dropdown-item>
-            <wa-dropdown-item>Your Local Chapter</wa-dropdown-item>
-            <wa-dropdown-item>Youth Programs</wa-dropdown-item>
-            <wa-dropdown-item>Camps</wa-dropdown-item>
-          </wa-dropdown>
-        </nav>
-        <div class="header-actions">
-          <wa-button variant="default" outline>Find Your Local Chapter</wa-button>
-          <wa-button variant="primary">Donate</wa-button>
-        </div>
+        {% if breadcrumbs %}
+        <wa-breadcrumb class="header-breadcrumb">
+          {% for crumb in breadcrumbs %}
+          <wa-breadcrumb-item href="{{ crumb.url }}">{{ crumb.label }}</wa-breadcrumb-item>
+          {% endfor %}
+        </wa-breadcrumb>
+        {% endif %}
       </div>
     </div>
   </header>
@@ -186,14 +162,6 @@
 
       <!-- Page Content -->
       <article class="page-content">
-        {% if breadcrumbs %}
-        <wa-breadcrumb>
-          {% for crumb in breadcrumbs %}
-          <wa-breadcrumb-item href="{{ crumb.url }}">{{ crumb.label }}</wa-breadcrumb-item>
-          {% endfor %}
-        </wa-breadcrumb>
-        {% endif %}
-
         <div class="page-header">
           <h1>{{ title or pageTitle or "Page Title" }}</h1>
           {% if subtitle %}

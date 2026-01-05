@@ -1,3 +1,35 @@
+/* Brand Color Overrides */
+/* 
+ * Override Web Awesome brand colors with your custom brand palette.
+ * Replace these values with your actual brand colors.
+ * 
+ * Available shades: 05, 10, 20, 30, 40, 50, 60, 70, 80, 90, 95
+ * Where 95 is lightest and 05 is darkest.
+ */
+:root {
+  /* Option 1: Use an existing Web Awesome color variant */
+  /* Add class to <html> or <body>: wa-brand-red, wa-brand-green, etc. */
+  /* Available: wa-brand-red, wa-brand-orange, wa-brand-yellow, wa-brand-green,
+     wa-brand-cyan, wa-brand-blue, wa-brand-indigo, wa-brand-purple, 
+     wa-brand-pink, wa-brand-gray */
+  
+  /* Option 2: Define custom brand colors directly */
+  /* Uncomment and customize these values: */
+
+  --wa-color-brand-95: oklch(94.343% 0.02079 13.864); /* Lightest brand color */
+  --wa-color-brand-90: oklch(88.489% 0.04405 16.272);
+  --wa-color-brand-80: oklch(76.971% 0.09614 17.085);
+  --wa-color-brand-70: oklch(66.335% 0.15007 19.521);
+  --wa-color-brand-60: oklch(57.965% 0.19714 24.145);
+  --wa-color-brand-50: oklch(48.522% 0.1716 24.861); /* Base brand color */
+  --wa-color-brand-40: oklch(41.443% 0.14405 24.547);
+  --wa-color-brand-30: oklch(34.064% 0.11497 24.052);
+  --wa-color-brand-20: oklch(26.301% 0.08359 23.16);
+  --wa-color-brand-10: oklch(18.201% 0.04998 21.217); /* Darkest brand color */
+  --wa-color-brand-05: oklch(13.647% 0.03094 22.014);
+  --wa-color-brand: var(--wa-color-brand-50); /* Default brand color */
+}
+
 /* Base Styles */
 :root {
   --header-height: 64px;
@@ -18,8 +50,8 @@ body {
   padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   line-height: 1.6;
-  color: var(--wa-color-neutral-900);
-  background-color: var(--wa-color-neutral-0);
+  color: var(--wa-color-neutral-10);
+  background-color: var(--wa-color-neutral-95);
 }
 
 /* Header Styles */
@@ -27,9 +59,8 @@ body {
   position: sticky;
   top: 0;
   z-index: 100;
-  background-color: var(--wa-color-neutral-0);
-  border-bottom: 1px solid var(--wa-color-neutral-200);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  background-color: var(--wa-color-neutral-95);
+  border-bottom: 1px solid var(--wa-color-neutral-80);
 }
 
 .header-container {
@@ -44,18 +75,24 @@ body {
   justify-content: space-between;
   height: var(--header-height);
   gap: 2rem;
+  width: 100%;
+}
+
+.header-breadcrumb {
+  flex: 1;
+  margin: 0 2rem;
 }
 
 .logo {
   font-size: 1.25rem;
   font-weight: 600;
   text-decoration: none;
-  color: var(--wa-color-neutral-900);
+  color: var(--wa-color-neutral-10);
   white-space: nowrap;
 }
 
 .logo:hover {
-  color: var(--wa-color-primary-600);
+  color: var(--wa-color-brand-60);
 }
 
 .main-nav {
@@ -94,6 +131,7 @@ body {
   align-self: start;
   max-height: calc(100vh - var(--header-height) - 4rem);
   overflow-y: auto;
+  background-color: var(--wa-color-neutral-90);
 }
 
 .sidebar-nav {
@@ -103,7 +141,7 @@ body {
 .sidebar-nav wa-tree {
   display: block;
   --indent-guide-width: 2px;
-  --indent-guide-color: var(--wa-color-surface-border, var(--wa-color-neutral-300));
+  --indent-guide-color: var(--wa-color-neutral-80);
   --indent-guide-style: solid;
   --indent-guide-offset: 0.5rem;
 }
@@ -111,21 +149,23 @@ body {
 .sidebar-nav wa-tree-item a {
   display: block;
   padding: 0.5rem 1rem;
-  color: var(--wa-color-neutral-700);
+  color: var(--wa-color-neutral-30);
   text-decoration: none;
   border-radius: var(--wa-border-radius-medium);
   transition: all 0.2s;
 }
 
 .sidebar-nav wa-tree-item a:hover {
-  background-color: var(--wa-color-neutral-100);
-  color: var(--wa-color-primary-600);
+  background-color: var(--wa-color-neutral-85);
+  --indent-guide-color: var(--wa-color-brand-30);
+  color: var(--wa-color-brand-60);
 }
 
 .sidebar-nav wa-tree-item[selected] a {
-  background-color: var(--wa-color-primary-50);
-  color: var(--wa-color-primary-700);
-  font-weight: 500;
+  background-color: var(--wa-color-brand-90);
+  --indent-guide-color: var(--wa-color-brand-30);
+  color: var(--wa-color-brand-40);
+  font-weight: 700;
 }
 
 /* Page Content Styles */
@@ -137,14 +177,14 @@ body {
 .page-header {
   margin-bottom: 2.5rem;
   padding-bottom: 1.5rem;
-  border-bottom: 1px solid var(--wa-color-neutral-200);
+  border-bottom: 1px solid var(--wa-color-neutral-80);
 }
 
 .page-category {
   display: inline-block;
   padding: 0.25rem 0.75rem;
-  background-color: var(--wa-color-neutral-100);
-  color: var(--wa-color-neutral-700);
+  background-color: var(--wa-color-neutral-90);
+  color: var(--wa-color-neutral-30);
   border-radius: var(--wa-border-radius-small);
   font-size: 0.875rem;
   font-weight: 500;
@@ -158,12 +198,12 @@ body {
   font-weight: 700;
   line-height: 1.2;
   margin: 0 0 0.5rem 0;
-  color: var(--wa-color-neutral-900);
+  color: var(--wa-color-neutral-10);
 }
 
 .page-subtitle {
   font-size: 1.125rem;
-  color: var(--wa-color-neutral-600);
+  color: var(--wa-color-neutral-40);
   margin: 0;
 }
 
@@ -172,9 +212,9 @@ body {
   font-size: 1.875rem;
   font-weight: 600;
   margin: 2.5rem 0 1rem 0;
-  color: var(--wa-color-neutral-900);
+  color: var(--wa-color-neutral-10);
   padding-top: 1rem;
-  border-top: 1px solid var(--wa-color-neutral-200);
+  border-top: 1px solid var(--wa-color-neutral-80);
   position: relative;
   scroll-margin-top: 2rem;
 }
@@ -193,7 +233,7 @@ body {
   opacity: 0;
   transition: opacity 0.2s;
   text-decoration: none;
-  color: var(--wa-color-neutral-400);
+  color: var(--wa-color-neutral-60);
   font-weight: normal;
   font-size: 0.875em;
 }
@@ -211,14 +251,14 @@ body {
 .page-content h4 .heading-anchor:hover,
 .page-content h5 .heading-anchor:hover,
 .page-content h6 .heading-anchor:hover {
-  color: var(--wa-color-primary-600);
+  color: var(--wa-color-brand-60);
 }
 
 .page-content h3 {
   font-size: 1.5rem;
   font-weight: 600;
   margin: 2rem 0 0.75rem 0;
-  color: var(--wa-color-neutral-900);
+  color: var(--wa-color-neutral-10);
   position: relative;
   scroll-margin-top: 2rem;
 }
@@ -227,21 +267,21 @@ body {
   font-size: 1.25rem;
   font-weight: 600;
   margin: 1.5rem 0 0.5rem 0;
-  color: var(--wa-color-neutral-800);
+  color: var(--wa-color-neutral-20);
   position: relative;
   scroll-margin-top: 2rem;
 }
 
 .page-content p {
   margin: 0 0 1.25rem 0;
-  color: var(--wa-color-neutral-700);
+  color: var(--wa-color-neutral-30);
 }
 
 .page-content ul,
 .page-content ol {
   margin: 0 0 1.25rem 0;
   padding-left: 1.5rem;
-  color: var(--wa-color-neutral-700);
+  color: var(--wa-color-neutral-30);
 }
 
 .page-content li {
@@ -249,7 +289,7 @@ body {
 }
 
 .page-content a {
-  color: var(--wa-color-primary-600);
+  color: var(--wa-color-brand-60);
   text-decoration: none;
 }
 
@@ -258,16 +298,16 @@ body {
 }
 
 .page-content code {
-  background-color: var(--wa-color-neutral-100);
+  background-color: var(--wa-color-neutral-90);
   padding: 0.125rem 0.375rem;
   border-radius: var(--wa-border-radius-small);
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
   font-size: 0.875em;
-  color: var(--wa-color-neutral-900);
+  color: var(--wa-color-neutral-10);
 }
 
 .page-content pre {
-  background-color: var(--wa-color-neutral-100);
+  background-color: var(--wa-color-neutral-90);
   padding: 1rem;
   border-radius: var(--wa-border-radius-medium);
   overflow-x: auto;
@@ -280,17 +320,17 @@ body {
 }
 
 .page-content blockquote {
-  border-left: 4px solid var(--wa-color-primary-500);
+  border-left: 4px solid var(--wa-color-brand-50);
   padding-left: 1rem;
   margin: 1.25rem 0;
-  color: var(--wa-color-neutral-600);
+  color: var(--wa-color-neutral-40);
   font-style: italic;
 }
 
 /* Footer Styles */
 .site-footer {
-  background-color: var(--wa-color-neutral-50);
-  border-top: 1px solid var(--wa-color-neutral-200);
+  background-color: var(--wa-color-neutral-95);
+  border-top: 1px solid var(--wa-color-neutral-80);
   padding: 3rem 0 1.5rem 0;
   margin-top: 4rem;
 }
@@ -313,12 +353,12 @@ body {
   margin: 0 0 1rem 0;
   font-size: 1rem;
   font-weight: 600;
-  color: var(--wa-color-neutral-900);
+  color: var(--wa-color-neutral-10);
 }
 
 .footer-section p {
   margin: 0 0 1rem 0;
-  color: var(--wa-color-neutral-600);
+  color: var(--wa-color-neutral-40);
   font-size: 0.875rem;
 }
 
@@ -333,24 +373,24 @@ body {
 }
 
 .footer-section ul li a {
-  color: var(--wa-color-neutral-600);
+  color: var(--wa-color-neutral-40);
   text-decoration: none;
   font-size: 0.875rem;
 }
 
 .footer-section ul li a:hover {
-  color: var(--wa-color-primary-600);
+  color: var(--wa-color-brand-60);
 }
 
 .footer-bottom {
   padding-top: 1.5rem;
-  border-top: 1px solid var(--wa-color-neutral-200);
+  border-top: 1px solid var(--wa-color-neutral-80);
   text-align: center;
 }
 
 .footer-bottom p {
   margin: 0;
-  color: var(--wa-color-neutral-500);
+  color: var(--wa-color-neutral-50);
   font-size: 0.875rem;
 }
 
@@ -393,17 +433,17 @@ body {
 }
 
 /* Breadcrumb Styles */
-.page-content wa-breadcrumb {
-  margin-bottom: 1.5rem;
+.header-breadcrumb {
+  font-size: 0.875rem;
 }
 
 /* Component Showcase Styles */
 .component-showcase {
   margin: 2rem 0;
   padding: 1.5rem;
-  background-color: var(--wa-color-neutral-50);
+  background-color: var(--wa-color-neutral-95);
   border-radius: var(--wa-border-radius-medium);
-  border: 1px solid var(--wa-color-neutral-200);
+  border: 1px solid var(--wa-color-neutral-80);
 }
 
 .component-showcase h3 {
