@@ -4,6 +4,8 @@
 document.addEventListener('DOMContentLoaded', () => {
   // Initialize navigation tree persistence
   initNavPersistence();
+  // Set selected state for current page
+  setSelectedTreeItem();
 });
 
 /**
@@ -74,6 +76,58 @@ function initNavPersistence() {
     const currentState = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
     currentState[identifier] = expanded;
     localStorage.setItem(STORAGE_KEY, JSON.stringify(currentState));
+  }
+}
+
+/**
+ * Set the selected state on the tree item for the current page
+ */
+function setSelectedTreeItem() {
+  const tree = document.querySelector('.sidebar-nav wa-tree');
+  if (!tree) return;
+  
+  // Wait for Web Awesome components to be defined
+  const setupSelection = () => {
+    const currentPath = window.location.pathname;
+    const allTreeItems = tree.querySelectorAll('wa-tree-item');
+    
+    // Clear all selections first (following Web Awesome pattern)
+    allTreeItems.forEach(item => {
+      item.selected = false;
+    });
+    
+    // Find and select the current page's tree item
+    allTreeItems.forEach(item => {
+      const link = item.querySelector('a');
+      if (link) {
+        const linkHref = link.getAttribute('href');
+        // Normalize paths for comparison (remove trailing slashes)
+        const normalizedCurrent = currentPath.replace(/\/$/, '') || '/';
+        const normalizedLink = linkHref.replace(/\/$/, '') || '/';
+        
+        // Check if this link matches the current page
+        if (normalizedLink === normalizedCurrent || 
+            normalizedCurrent.startsWith(normalizedLink + '/')) {
+          // Set selected attribute
+          item.selected = true;
+          
+          // Also expand parent items to show the selected item
+          let parent = item.parentElement;
+          while (parent && parent.tagName === 'WA-TREE-ITEM') {
+            parent.expanded = true;
+            parent = parent.parentElement;
+          }
+        }
+      }
+    });
+  };
+  
+  if (customElements.get('wa-tree-item')) {
+    setupSelection();
+  } else {
+    window.addEventListener('load', () => {
+      setTimeout(setupSelection, 100);
+    });
   }
 }
 

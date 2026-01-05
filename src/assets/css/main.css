@@ -146,6 +146,7 @@ body {
   --indent-guide-offset: 0.5rem;
 }
 
+/* Style tree item links */
 .sidebar-nav wa-tree-item a {
   display: block;
   padding: 0.5rem 1rem;
@@ -156,16 +157,15 @@ body {
 }
 
 .sidebar-nav wa-tree-item a:hover {
-  background-color: var(--wa-color-neutral-85);
-  --indent-guide-color: var(--wa-color-brand-30);
+  background-color: var(--wa-color-neutral-90);
   color: var(--wa-color-brand-60);
 }
 
+/* Selected state - Web Awesome sets the selected attribute automatically */
 .sidebar-nav wa-tree-item[selected] a {
-  background-color: var(--wa-color-brand-90);
-  --indent-guide-color: var(--wa-color-brand-30);
+  background-color: var(--wa-color-neutral-90);
   color: var(--wa-color-brand-40);
-  font-weight: 700;
+  font-weight: 500;
 }
 
 /* Page Content Styles */
