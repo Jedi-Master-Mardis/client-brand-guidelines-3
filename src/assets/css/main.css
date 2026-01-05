@@ -9,6 +9,10 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -98,8 +102,8 @@ body {
 
 .sidebar-nav wa-tree {
   display: block;
-  --indent-guide-width: 1px;
-  --indent-guide-color: var(--wa-color-neutral-300);
+  --indent-guide-width: 2px;
+  --indent-guide-color: var(--wa-color-surface-border, var(--wa-color-neutral-300));
   --indent-guide-style: solid;
   --indent-guide-offset: 0.5rem;
 }
@@ -171,6 +175,8 @@ body {
   color: var(--wa-color-neutral-900);
   padding-top: 1rem;
   border-top: 1px solid var(--wa-color-neutral-200);
+  position: relative;
+  scroll-margin-top: 2rem;
 }
 
 .page-content h2:first-of-type {
@@ -178,11 +184,43 @@ body {
   padding-top: 0;
 }
 
+.page-content h2 .heading-anchor,
+.page-content h3 .heading-anchor,
+.page-content h4 .heading-anchor,
+.page-content h5 .heading-anchor,
+.page-content h6 .heading-anchor {
+  margin-left: 0.5rem;
+  opacity: 0;
+  transition: opacity 0.2s;
+  text-decoration: none;
+  color: var(--wa-color-neutral-400);
+  font-weight: normal;
+  font-size: 0.875em;
+}
+
+.page-content h2:hover .heading-anchor,
+.page-content h3:hover .heading-anchor,
+.page-content h4:hover .heading-anchor,
+.page-content h5:hover .heading-anchor,
+.page-content h6:hover .heading-anchor {
+  opacity: 1;
+}
+
+.page-content h2 .heading-anchor:hover,
+.page-content h3 .heading-anchor:hover,
+.page-content h4 .heading-anchor:hover,
+.page-content h5 .heading-anchor:hover,
+.page-content h6 .heading-anchor:hover {
+  color: var(--wa-color-primary-600);
+}
+
 .page-content h3 {
   font-size: 1.5rem;
   font-weight: 600;
   margin: 2rem 0 0.75rem 0;
   color: var(--wa-color-neutral-900);
+  position: relative;
+  scroll-margin-top: 2rem;
 }
 
 .page-content h4 {
@@ -190,6 +228,8 @@ body {
   font-weight: 600;
   margin: 1.5rem 0 0.5rem 0;
   color: var(--wa-color-neutral-800);
+  position: relative;
+  scroll-margin-top: 2rem;
 }
 
 .page-content p {
