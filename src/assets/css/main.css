@@ -77,6 +77,7 @@ wa-page::part(header) {
   justify-content: space-between;
   padding: 0 1.5rem;
   border-bottom: 1px solid var(--wa-color-neutral-80);
+  background-color: var(--wa-color-surface-default);
   margin: 0 auto;
   width: 100%;
 }
@@ -107,9 +108,8 @@ wa-page::part(subheader) {
 
 /* Navigation Styles */
 wa-page::part(navigation) {
-  padding: 1rem 0;
-  max-height: calc(100vh - var(--header-height) - var(--subheader-height, 0px) - 2rem);
-  overflow-y: auto;
+  background-color: var(--wa-color-surface-lowered);
+  border-right: 1px solid var(--wa-color-surface-border);
 }
 
 wa-page::part(menu) {
@@ -118,7 +118,55 @@ wa-page::part(menu) {
 }
 
 .sidebar-nav {
+  padding: 1rem 0;
+  overflow-y: auto;
+  height: 100%;
+}
+
+/* Navigation Footer Styles */
+wa-page::part(navigation-footer) {
+  background-color: var(--wa-color-surface-lowered);
+  border-top: 1px solid var(--wa-color-surface-border);
   padding: 0;
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
+}
+
+.sidebar-nav-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
+  background-color: var(--wa-color-surface-lowered);
+  border-top: 1px solid var(--wa-color-surface-border);
+}
+
+.sidebar-nav-footer a {
+  display: block;
+  padding: 0.75rem 1rem;
+  color: var(--wa-color-neutral-30);
+  text-decoration: none;
+  border-radius: 0;
+  transition: all 0.2s;
+  border-bottom: 1px solid var(--wa-color-surface-border);
+  background-color: var(--wa-color-surface-lowered);
+}
+
+.sidebar-nav-footer a:last-child {
+  border-bottom: none;
+}
+
+.sidebar-nav-footer a:hover {
+  background-color: var(--wa-color-neutral-90);
+  color: var(--wa-color-brand-60);
+}
+
+.sidebar-nav-footer a[aria-current="page"],
+.sidebar-nav-footer a:active {
+  background-color: var(--wa-color-neutral-90);
+  color: var(--wa-color-brand-40);
+  font-weight: 600;
 }
 
 .sidebar-nav wa-tree {
