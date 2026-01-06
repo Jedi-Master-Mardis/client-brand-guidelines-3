@@ -2,6 +2,8 @@
 // Add any custom JavaScript functionality here
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Initialize theme toggle
+  initThemeToggle();
   // Initialize navigation tree persistence
   initNavPersistence();
   // Set selected state for current page
@@ -11,6 +13,69 @@ document.addEventListener('DOMContentLoaded', () => {
   // Setup anchor link animations
   setupAnchorAnimations();
 });
+
+/**
+ * Initialize theme toggle functionality
+ */
+function initThemeToggle() {
+  const STORAGE_KEY = 'theme-preference';
+  const themeToggle = document.getElementById('theme-toggle');
+  const themeIcon = document.getElementById('theme-icon');
+  const html = document.documentElement;
+  
+  if (!themeToggle || !themeIcon) return;
+  
+  // Get saved theme preference or default to light
+  const getStoredTheme = () => {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored === 'dark' || stored === 'light') {
+      return stored;
+    }
+    // Check system preference if no stored preference
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      return 'dark';
+    }
+    return 'light';
+  };
+  
+  // Apply theme
+  const applyTheme = (theme) => {
+    if (theme === 'dark') {
+      html.classList.add('wa-dark');
+      html.classList.remove('wa-light');
+      themeIcon.name = 'sun';
+      themeToggle.setAttribute('aria-label', 'Switch to light mode');
+    } else {
+      html.classList.add('wa-light');
+      html.classList.remove('wa-dark');
+      themeIcon.name = 'moon';
+      themeToggle.setAttribute('aria-label', 'Toggle dark mode');
+    }
+    localStorage.setItem(STORAGE_KEY, theme);
+  };
+  
+  // Initialize theme on load
+  const initialTheme = getStoredTheme();
+  applyTheme(initialTheme);
+  
+  // Toggle theme on button click
+  themeToggle.addEventListener('click', () => {
+    const currentTheme = html.classList.contains('wa-dark') ? 'dark' : 'light';
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    applyTheme(newTheme);
+  });
+  
+  // Listen for system theme changes
+  if (window.matchMedia) {
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    mediaQuery.addEventListener('change', (e) => {
+      // Only auto-switch if user hasn't set a preference
+      if (!localStorage.getItem(STORAGE_KEY)) {
+        applyTheme(e.matches ? 'dark' : 'light');
+      }
+    });
+  }
+}
 
 /**
  * Persist navigation tree expanded/collapsed state

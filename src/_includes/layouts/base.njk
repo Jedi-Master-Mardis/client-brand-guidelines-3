@@ -11,11 +11,36 @@
   
   <!-- Custom styles -->
   <link rel="stylesheet" href="/assets/css/main.css">
+  
+  <!-- Theme initialization script (prevents flash of unstyled content) -->
+  <script>
+    (function() {
+      const STORAGE_KEY = 'theme-preference';
+      const getStoredTheme = () => {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (stored === 'dark' || stored === 'light') {
+          return stored;
+        }
+        // Check system preference if no stored preference
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          return 'dark';
+        }
+        return 'light';
+      };
+      const theme = getStoredTheme();
+      if (theme === 'dark') {
+        document.documentElement.classList.add('wa-dark');
+      } else {
+        document.documentElement.classList.add('wa-light');
+      }
+    })();
+  </script>
 </head>
 <body>
   <wa-page mobile-breakpoint="920">
     <!-- Header -->
-    <div slot="header" class="wa-cluster">
+    <div slot="header">
+    <div class="wa-cluster">
       <wa-button data-toggle-nav variant="neutral" appearance="outlined"><wa-icon name="bars"></wa-icon></wa-button>
       <a href="/" class="logo">
         <strong>Moffitt Brand Guidelines</strong>
@@ -29,6 +54,12 @@
         </wa-breadcrumb>
 
       {% endif %}
+      
+    </div>
+    <wa-button id="theme-toggle" variant="neutral" appearance="outlined" aria-label="Toggle dark mode">
+      <wa-icon name="moon" id="theme-icon"></wa-icon>
+    </wa-button>
+    </div>
     </div>
 
     <!-- Subheader (Breadcrumbs) -->
@@ -126,10 +157,7 @@
               </wa-tree-item>
             </wa-tree-item>
             
-            <!-- 6. Changelog -->
-            <wa-tree-item>
-              <a href="/changelog">Changelog</a>
-            </wa-tree-item>
+        
           </wa-tree>
     </div>
 
@@ -161,7 +189,7 @@
       <div class="footer-container">
        
         <div class="footer-bottom">
-          <p>&copy; Moffitt Companies. All rights reserved. Maintained by Voilxy. Updated on January 5, {{ "" | year }}.</p>
+          <p>&copy; Moffitt Companies. All rights reserved. Maintained by Voilxy. Updated on January 5, {{ "" | year }}. View the <a href="/changelog">changelog</a>.</p>
         </div>
       </div>
     </div>

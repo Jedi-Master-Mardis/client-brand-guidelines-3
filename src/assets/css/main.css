@@ -28,8 +28,14 @@
   --wa-color-brand-10: oklch(18.201% 0.04998 21.217); /* Darkest brand color */
   --wa-color-brand-05: oklch(13.647% 0.03094 22.014);
   --wa-color-brand: var(--wa-color-brand-50); /* Default brand color */
+  
+  /* Text color - use CSS variable for theme support */
+  --wa-color-text-normal: var(--wa-color-neutral-10);
+}
 
-  --wa-color-text-normal: #24292F;
+/* Dark mode text color override */
+.wa-dark {
+  --wa-color-text-normal: var(--wa-color-neutral-95);
 }
 
 /* Base Styles */
@@ -37,13 +43,10 @@
   --header-height: 64px;
   --sidebar-width: 280px;
   --content-max-width: 960px;
-  
-  /* Ensure Web Awesome surface colors are defined */
-  --wa-color-surface-default: var(--wa-color-neutral-95);
-  --wa-color-surface-raised: white;
-  --wa-color-surface-lowered: var(--wa-color-neutral-90);
-  --wa-color-surface-border: var(--wa-color-neutral-80);
 }
+
+/* Let Web Awesome handle surface colors through its theme system */
+/* Surface colors are automatically set by .wa-light and .wa-dark classes */
 
 * {
   box-sizing: border-box;
@@ -51,6 +54,7 @@
 
 html {
   scroll-behavior: smooth;
+  background-color: var(--wa-color-surface-default);
 }
 
 body {
@@ -58,7 +62,8 @@ body {
   padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   line-height: 1.6;
-  color: var(--wa-color-neutral-10);
+  color: var(--wa-color-text-normal);
+  background-color: var(--wa-color-surface-default);
 }
 
 /* wa-page Styles */
@@ -78,7 +83,7 @@ wa-page::part(header) {
   align-items: center;
   justify-content: space-between;
   padding: 0 1.5rem;
-  border-bottom: 1px solid var(--wa-color-neutral-80);
+  border-bottom: 1px solid var(--wa-color-surface-border);
   background-color: var(--wa-color-surface-default);
   margin: 0 auto;
   width: 100%;
@@ -100,7 +105,7 @@ wa-page::part(subheader) {
   font-size: var(--wa-font-size-2xl);
   font-weight: 600;
   text-decoration: none;
-  color: var(--wa-color-neutral-10);
+  color: var(--wa-color-text-normal);
   white-space: nowrap;
 }
 
@@ -115,8 +120,8 @@ wa-page::part(navigation) {
 }
 
 wa-page::part(menu) {
-  background-color: var(--wa-color-neutral-95);
-  border-right: 1px solid var(--wa-color-neutral-80);
+  background-color: var(--wa-color-surface-default);
+  border-right: 1px solid var(--wa-color-surface-border);
 }
 
 .sidebar-nav {
@@ -127,7 +132,7 @@ wa-page::part(menu) {
 
 /* Navigation Footer Styles */
 wa-page::part(navigation-footer) {
-  background-color: var(--wa-color-surface-lowered);
+  background-color: ;
   border-top: 1px solid var(--wa-color-surface-border);
   padding: 0;
   position: sticky;
@@ -140,7 +145,7 @@ wa-page::part(navigation-footer) {
   flex-direction: column;
   gap: 0;
   padding: 0;
-  background-color: var(--wa-color-surface-lowered);
+  background-color: ;
   border-top: 1px solid var(--wa-color-surface-border);
 }
 
@@ -152,7 +157,7 @@ wa-page::part(navigation-footer) {
   border-radius: 0;
   transition: all 0.2s;
   border-bottom: 1px solid var(--wa-color-surface-border);
-  background-color: var(--wa-color-surface-lowered);
+  background-color: ;
 }
 
 .sidebar-nav-footer a:last-child {
@@ -160,13 +165,13 @@ wa-page::part(navigation-footer) {
 }
 
 .sidebar-nav-footer a:hover {
-  background-color: var(--wa-color-neutral-90);
+  background-color: var(--wa-color-surface-lowered);
   color: var(--wa-color-text-normal);
 }
 
 .sidebar-nav-footer a[aria-current="page"],
 .sidebar-nav-footer a:active {
-  background-color: var(--wa-color-neutral-90);
+  background-color: var(--wa-color-surface-lowered);
   color: var(--wa-color-text-normal);
   font-weight: 600;
 }
@@ -218,13 +223,13 @@ wa-page::part(main-content) {
 .page-header {
   margin-bottom: 2.5rem;
   padding-bottom: 1.5rem;
-  border-bottom: 1px solid var(--wa-color-neutral-80);
+  border-bottom: 1px solid var(--wa-color-surface-border);
 }
 
 .page-category {
   display: inline-block;
   padding: 0.25rem 0.75rem;
-  background-color: var(--wa-color-neutral-90);
+  background-color: var(--wa-color-surface-lowered);
   color: var(--wa-color-text-normal);
   border-radius: var(--wa-border-radius-s);
 
@@ -249,7 +254,7 @@ wa-page::part(main-content) {
   opacity: 0;
   transition: opacity 0.2s;
   text-decoration: none;
-  color: var(--wa-color-neutral-60);
+  color: var(--wa-color-text-normal);
   font-weight: normal;
 
 }
@@ -275,7 +280,7 @@ wa-page::part(main-content) {
   margin: 2.5rem 0 1rem 0;
   color: var(--wa-color-text-normal);
   padding-top: 1rem;
-  border-top: 1px solid var(--wa-color-neutral-80);
+  border-top: 1px solid var(--wa-color-surface-border);
   position: relative;
   scroll-margin-top: calc(var(--wa-page-header-height, var(--header-height, 64px)) + var(--wa-page-subheader-height, 0px) + 1rem);
 }
@@ -341,7 +346,7 @@ wa-page::part(main-content) {
 .page-content h3 {
   font-weight: 600;
   margin: 2rem 0 0.75rem 0;
-  color: var(--wa-color-neutral-10);
+  color: var(--wa-color-text-normal);
   position: relative;
   scroll-margin-top: calc(var(--wa-page-header-height, var(--header-height, 64px)) + var(--wa-page-subheader-height, 0px) + 1rem);
 }
@@ -380,16 +385,15 @@ wa-page::part(main-content) {
 }
 
 .page-content code {
-  background-color: var(--wa-color-neutral-90);
+  background-color: var(--wa-color-surface-lowered);
   padding: 0.125rem 0.375rem;
   border-radius: var(--wa-border-radius-s);
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
-
-  color: var(--wa-color-neutral-10);
+  color: var(--wa-color-text-normal);
 }
 
 .page-content pre {
-  background-color: var(--wa-color-neutral-90);
+  background-color: var(--wa-color-surface-lowered);
   padding: 1rem;
   border-radius: var(--wa-border-radius-m);
   overflow-x: auto;
@@ -411,8 +415,8 @@ wa-page::part(main-content) {
 
 /* Footer Styles */
 wa-page::part(footer) {
-  background-color: var(--wa-color-neutral-95);
-  border-top: 1px solid var(--wa-color-neutral-80);
+  background-color: var(--wa-color-surface-default);
+  border-top: 1px solid var(--wa-color-surface-border);
   padding: 3rem 0 1.5rem 0;
   align-items: center;
   justify-content: center;
@@ -436,9 +440,8 @@ wa-page::part(footer) {
 .footer-section h3,
 .footer-section h4 {
   margin: 0 0 1rem 0;
-
   font-weight: 600;
-  color: var(--wa-color-neutral-10);
+  color: var(--wa-color-text-normal);
 }
 
 .footer-section p {
@@ -492,9 +495,9 @@ wa-page::part(footer) {
 .component-showcase {
   margin: 2rem 0;
   padding: 1.5rem;
-  background-color: var(--wa-color-neutral-95);
+  background-color: var(--wa-color-surface-default);
   border-radius: var(--wa-border-radius-l);
-  border: 1px solid var(--wa-color-neutral-80);
+  border: 1px solid var(--wa-color-surface-border);
 }
 
 .component-showcase h3 {
