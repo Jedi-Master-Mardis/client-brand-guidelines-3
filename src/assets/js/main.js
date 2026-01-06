@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
   setSelectedTreeItem();
   // Update selection when clicking on tree items
   setupTreeItemClickHandlers();
+  // Setup anchor link animations
+  setupAnchorAnimations();
 });
 
 /**
@@ -199,5 +201,200 @@ function setupTreeItemClickHandlers() {
       setTimeout(setupClickHandlers, 100);
     });
   }
+}
+
+/**
+ * Setup tada animation for anchor links when navigated to
+ */
+function setupAnchorAnimations() {
+  // Wait for wa-animation component to be available
+  const initAnimations = () => {
+    // Handle initial hash on page load
+    if (window.location.hash) {
+      // Wait for page to fully load and scroll to complete
+      window.addEventListener('load', () => {
+        setTimeout(() => {
+          animateTargetHeading(window.location.hash);
+        }, 500);
+      });
+    } else {
+      // If no hash, animate the h1 on page load (for page-level nav links)
+      window.addEventListener('load', () => {
+        setTimeout(() => {
+          const h1 = document.querySelector('.page-header h1');
+          if (h1 && h1.id) {
+            animateTargetHeading('#' + h1.id);
+          }
+        }, 300);
+      });
+    }
+    
+    // Handle hash changes (when clicking anchor links)
+    window.addEventListener('hashchange', () => {
+      if (window.location.hash) {
+        // Wait for smooth scroll to complete
+        setTimeout(() => {
+          animateTargetHeading(window.location.hash);
+        }, 500);
+      }
+    });
+    
+    // Handle clicks on anchor links (including nav links)
+    document.addEventListener('click', (event) => {
+      const anchor = event.target.closest('a');
+      if (!anchor) return;
+      
+      const href = anchor.getAttribute('href');
+      if (!href) return;
+      
+      // Handle page-level nav links (no hash) - animate h1
+      if (!href.includes('#') && anchor.closest('.sidebar-nav')) {
+        const [path, hashPart] = href.split('#');
+        const normalizePath = (p) => {
+          if (!p || p === '') return window.location.pathname;
+          p = p.replace(/\/$/, '') || '/';
+          if (p.startsWith('/')) return p;
+          return new URL(p, window.location.href).pathname.replace(/\/$/, '') || '/';
+        };
+        
+        const normalizedHrefPath = normalizePath(path);
+        const normalizedCurrentPath = window.location.pathname.replace(/\/$/, '') || '/';
+        const isSamePage = normalizedHrefPath === normalizedCurrentPath;
+        
+        // If it's a same-page link (shouldn't happen, but handle it)
+        if (isSamePage) {
+          setTimeout(() => {
+            const h1 = document.querySelector('.page-header h1');
+            if (h1 && h1.id) {
+              animateTargetHeading('#' + h1.id);
+            }
+          }, 300);
+        }
+        // For different pages, the page will reload and the load event handler will animate h1
+        return;
+      }
+      
+      // Check if it's an anchor link (contains #)
+      if (href.includes('#') && href !== '#') {
+        const [path, hashPart] = href.split('#');
+        const hash = '#' + hashPart;
+        
+        // Normalize paths for comparison (remove trailing slashes, handle relative paths)
+        const normalizePath = (p) => {
+          if (!p || p === '') return window.location.pathname;
+          // Remove trailing slash
+          p = p.replace(/\/$/, '') || '/';
+          // If it starts with /, it's absolute
+          if (p.startsWith('/')) return p;
+          // Otherwise, resolve relative to current path
+          return new URL(p, window.location.href).pathname.replace(/\/$/, '') || '/';
+        };
+        
+        const normalizedHrefPath = normalizePath(path);
+        const normalizedCurrentPath = window.location.pathname.replace(/\/$/, '') || '/';
+        const isSamePage = normalizedHrefPath === normalizedCurrentPath;
+        
+        // If it's a nav link with a hash on the same page, handle scroll manually
+        if (anchor.closest('.sidebar-nav') && isSamePage) {
+          const id = hashPart;
+          const targetElement = document.getElementById(id);
+          
+          if (targetElement) {
+            event.preventDefault();
+            
+            // Update URL first
+            window.history.pushState(null, '', hash);
+            
+            // Get header heights for calculation
+            const waPage = document.querySelector('wa-page');
+            const headerHeight = waPage 
+              ? parseFloat(getComputedStyle(waPage).getPropertyValue('--header-height')) || 64
+              : parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-height')) || 64;
+            const subheaderHeight = waPage
+              ? parseFloat(getComputedStyle(waPage).getPropertyValue('--subheader-height')) || 0
+              : 0;
+            const offset = headerHeight + subheaderHeight + 16; // 16px = 1rem
+            
+            // Calculate the target scroll position
+            const rect = targetElement.getBoundingClientRect();
+            const absoluteTop = rect.top + window.pageYOffset;
+            const targetScroll = absoluteTop - offset;
+            
+            // Scroll to the calculated position
+            window.scrollTo({
+              top: Math.max(0, targetScroll),
+              behavior: 'smooth'
+            });
+            
+            // Trigger animation after scroll completes
+            setTimeout(() => {
+              animateTargetHeading(hash);
+              // Manually trigger hashchange for other listeners
+              window.dispatchEvent(new HashChangeEvent('hashchange'));
+            }, 600);
+          }
+        } else if (isSamePage) {
+          // For same-page anchor links (not nav), delay to allow smooth scroll to complete first
+          setTimeout(() => {
+            animateTargetHeading(hash);
+          }, 500);
+        }
+        // If it's a different page, let the browser handle navigation normally
+      }
+    });
+  };
+  
+  if (customElements.get('wa-animation')) {
+    initAnimations();
+  } else {
+    window.addEventListener('load', () => {
+      setTimeout(initAnimations, 100);
+    });
+  }
+}
+
+/**
+ * Animate a heading when it's the target of an anchor link
+ */
+function animateTargetHeading(hash) {
+  if (!hash || hash === '#') return;
+  
+  // Remove # from hash to get the ID
+  const id = hash.substring(1);
+  const targetElement = document.getElementById(id);
+  
+  if (!targetElement) return;
+  
+  // Check if it's a heading element
+  const heading = targetElement.tagName.match(/^H[1-6]$/) ? targetElement : null;
+  if (!heading) return;
+  
+  // Get or create animation wrapper for this heading
+  let animation = heading.closest('wa-animation');
+  
+  if (!animation) {
+    // Create animation wrapper if it doesn't exist
+    const parent = heading.parentNode;
+    
+    animation = document.createElement('wa-animation');
+    animation.name = 'pulse';
+    animation.duration = 1000;
+    animation.iterations = 1;
+    animation.easing = 'ease-in-out';
+    
+    // Wrap the heading with the animation
+    parent.insertBefore(animation, heading);
+    animation.appendChild(heading);
+  }
+  
+  // Trigger the animation
+  // Reset first to allow restart
+  animation.play = false;
+  // Force a reflow to ensure reset takes effect
+  void animation.offsetHeight;
+  // Use requestAnimationFrame to ensure the reset is processed
+  requestAnimationFrame(() => {
+    animation.play = true;
+  });
 }
 

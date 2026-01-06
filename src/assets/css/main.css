@@ -34,7 +34,7 @@
 :root {
   --header-height: 64px;
   --sidebar-width: 280px;
-  --content-max-width: 1200px;
+  --content-max-width: 960px;
   
   /* Ensure Web Awesome surface colors are defined */
   --wa-color-surface-default: var(--wa-color-neutral-95);
@@ -94,7 +94,7 @@ wa-page::part(subheader) {
 }
 
 .logo {
-  font-size: 1.25rem;
+  font-size: var(--wa-font-size-2xl);
   font-weight: 600;
   text-decoration: none;
   color: var(--wa-color-neutral-10);
@@ -145,22 +145,23 @@ wa-page::part(menu) {
 }
 
 /* Selected state - Web Awesome sets the selected attribute automatically */
-.sidebar-nav wa-tree-item[selected] a {
-
+/* Only style the direct link, not links in child tree items */
+.sidebar-nav wa-tree-item[selected] > a {
   color: var(--wa-color-brand-40);
   font-weight: 700;
 }
 
 /* Main Content Styles */
 wa-page::part(main-content) {
-  max-width: var(--content-max-width);
-  margin: 0 auto;
+  max-width: 100%;
+  margin: 0;
   padding: 2rem 1.5rem;
 }
 
 /* Page Content Styles */
 .page-content {
-  max-width: 800px;
+  max-width: var(--content-max-width);
+  margin: 0 auto;
   padding: 0 0 4rem 0;
 }
 
@@ -176,7 +177,7 @@ wa-page::part(main-content) {
   background-color: var(--wa-color-neutral-90);
   color: var(--wa-color-neutral-30);
   border-radius: var(--wa-border-radius-small);
-  font-size: 0.875rem;
+
   font-weight: 500;
   margin-bottom: 1rem;
   text-transform: uppercase;
@@ -184,29 +185,49 @@ wa-page::part(main-content) {
 }
 
 .page-header h1 {
-  font-size: 2.5rem;
+
   font-weight: 700;
   line-height: 1.2;
   margin: 0 0 0.5rem 0;
   color: var(--wa-color-neutral-10);
+  position: relative;
+  scroll-margin-top: calc(var(--wa-page-header-height, var(--header-height, 64px)) + var(--wa-page-subheader-height, 0px) + 1rem);
+}
+
+.page-header h1 .heading-anchor {
+  margin-left: 0.5rem;
+  opacity: 0;
+  transition: opacity 0.2s;
+  text-decoration: none;
+  color: var(--wa-color-neutral-60);
+  font-weight: normal;
+
+}
+
+.page-header h1:hover .heading-anchor {
+  opacity: 1;
+}
+
+.page-header h1 .heading-anchor:hover {
+  color: var(--wa-color-brand-60);
 }
 
 .page-subtitle {
-  font-size: 1.125rem;
+
   color: var(--wa-color-neutral-40);
   margin: 0;
 }
 
 /* Content Typography */
 .page-content h2 {
-  font-size: 1.875rem;
+
   font-weight: 600;
   margin: 2.5rem 0 1rem 0;
   color: var(--wa-color-neutral-10);
   padding-top: 1rem;
   border-top: 1px solid var(--wa-color-neutral-80);
   position: relative;
-  scroll-margin-top: 2rem;
+  scroll-margin-top: calc(var(--wa-page-header-height, var(--header-height, 64px)) + var(--wa-page-subheader-height, 0px) + 1rem);
 }
 
 .page-content h2:first-of-type {
@@ -225,7 +246,7 @@ wa-page::part(main-content) {
   text-decoration: none;
   color: var(--wa-color-neutral-60);
   font-weight: normal;
-  font-size: 0.875em;
+
 }
 
 .page-content h2:hover .heading-anchor,
@@ -244,22 +265,43 @@ wa-page::part(main-content) {
   color: var(--wa-color-brand-60);
 }
 
+/* Remove any highlight box styles for anchor targets */
+.page-content h2:target,
+.page-content h3:target,
+.page-content h4:target,
+.page-content h5:target,
+.page-content h6:target {
+  outline: none;
+  background: none;
+}
+
+/* Ensure h5 and h6 also have proper scroll margin */
+.page-content h5,
+.page-content h6 {
+  scroll-margin-top: calc(var(--wa-page-header-height, var(--header-height, 64px)) + var(--wa-page-subheader-height, 0px) + 1rem);
+  position: relative;
+}
+
+/* Animation wrapper styles - keep it in the DOM */
+.page-content wa-animation {
+  display: block;
+  width: 100%;
+}
+
 .page-content h3 {
-  font-size: 1.5rem;
   font-weight: 600;
   margin: 2rem 0 0.75rem 0;
   color: var(--wa-color-neutral-10);
   position: relative;
-  scroll-margin-top: 2rem;
+  scroll-margin-top: calc(var(--wa-page-header-height, var(--header-height, 64px)) + var(--wa-page-subheader-height, 0px) + 1rem);
 }
 
 .page-content h4 {
-  font-size: 1.25rem;
   font-weight: 600;
   margin: 1.5rem 0 0.5rem 0;
   color: var(--wa-color-neutral-20);
   position: relative;
-  scroll-margin-top: 2rem;
+  scroll-margin-top: calc(var(--wa-page-header-height, var(--header-height, 64px)) + var(--wa-page-subheader-height, 0px) + 1rem);
 }
 
 .page-content p {
@@ -292,7 +334,7 @@ wa-page::part(main-content) {
   padding: 0.125rem 0.375rem;
   border-radius: var(--wa-border-radius-small);
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
-  font-size: 0.875em;
+
   color: var(--wa-color-neutral-10);
 }
 
@@ -344,7 +386,7 @@ wa-page::part(footer) {
 .footer-section h3,
 .footer-section h4 {
   margin: 0 0 1rem 0;
-  font-size: 1rem;
+
   font-weight: 600;
   color: var(--wa-color-neutral-10);
 }
@@ -352,7 +394,7 @@ wa-page::part(footer) {
 .footer-section p {
   margin: 0 0 1rem 0;
   color: var(--wa-color-neutral-40);
-  font-size: 0.875rem;
+
 }
 
 .footer-section ul {
@@ -368,7 +410,7 @@ wa-page::part(footer) {
 .footer-section ul li a {
   color: var(--wa-color-neutral-40);
   text-decoration: none;
-  font-size: 0.875rem;
+
 }
 
 .footer-section ul li a:hover {
@@ -384,7 +426,6 @@ wa-page::part(footer) {
 .footer-bottom p {
   margin: 0;
   color: var(--wa-color-neutral-50);
-  font-size: 0.875rem;
 }
 
 /* Responsive Design */
@@ -393,15 +434,9 @@ wa-page::part(footer) {
     padding: 1rem;
   }
 
-  .page-header h1 {
-    font-size: 2rem;
-  }
+
 }
 
-/* Breadcrumb Styles */
-.header-breadcrumb {
-  font-size: 0.875rem;
-}
 
 /* Component Showcase Styles */
 .component-showcase {

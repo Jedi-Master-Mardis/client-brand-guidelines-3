@@ -161,7 +161,10 @@
     <!-- Main Content -->
     <article class="page-content">
       <div class="page-header">
-        <h1>{{ title or pageTitle or "Page Title" }}</h1>
+        <h1 id="{{ (title or pageTitle or "Page Title") | anchorId }}">
+          {{ title or pageTitle or "Page Title" }}
+          <a href="#{{ (title or pageTitle or "Page Title") | anchorId }}" class="heading-anchor" aria-label="Permalink to &quot;{{ title or pageTitle or "Page Title" }}&quot;">#</a>
+        </h1>
         {% if subtitle %}
         <p class="page-subtitle">{{ subtitle }}</p>
         {% endif %}

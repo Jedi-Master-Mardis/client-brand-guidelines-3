@@ -8,14 +8,25 @@ const markdownItOptions = {
 };
 
 // Configure markdown-it with anchor plugin
+// Use 11ty's slugify to ensure consistent anchor ID generation
 const md = new markdownIt(markdownItOptions).use(markdownItAnchor, {
   level: [2, 3, 4, 5, 6],
   permalink: markdownItAnchor.permalink.ariaHidden({
     class: 'heading-anchor',
     symbol: '#',
     ariaLabel: 'Permalink',
-    placement: 'after'
-  })
+    placement: 'after',
+    assistiveText: title => `Permalink to "${title}"`
+  }),
+  slugify: function(text) {
+    // Use the same slugify logic as anchorId filter
+    return String(text)
+      .toLowerCase()
+      .replace(/[^\w\s-]/g, '') // Remove special characters (including apostrophes)
+      .replace(/\s+/g, '-') // Replace spaces with hyphens
+      .replace(/-+/g, '-') // Replace multiple hyphens with single
+      .trim();
+  }
 });
 
 module.exports = function(eleventyConfig) {
