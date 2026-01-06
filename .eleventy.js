@@ -36,6 +36,9 @@ module.exports = function(eleventyConfig) {
   // Copy assets from src directory
   eleventyConfig.addPassthroughCopy("src/assets");
   
+  // Copy images from src directory
+  eleventyConfig.addPassthroughCopy("src/images");
+  
   // Add markdown filter
   eleventyConfig.addFilter("markdown", function(value) {
     if (!value) return "";
