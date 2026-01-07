@@ -172,7 +172,7 @@
       <div class="page-header">
         <h1 id="{{ (title or pageTitle or "Page Title") | anchorId }}">
           {{ title or pageTitle or "Page Title" }}
-          <a href="#{{ (title or pageTitle or "Page Title") | anchorId }}" class="heading-anchor" aria-label="Permalink to &quot;{{ title or pageTitle or "Page Title" }}&quot;">#</a>
+          <wa-copy-button id="h1-copy-button" data-hash="{{ (title or pageTitle or "Page Title") | anchorId }}" size="small" class="heading-anchor" copy-label="Copy link" success-label="Copied!"></wa-copy-button>
         </h1>
         {% if subtitle %}
         <p class="page-subtitle">{{ subtitle }}</p>
@@ -185,10 +185,7 @@
     </article>
 
     <!-- Footer -->
-    <div slot="footer" class="site-footer">
-      <div class="footer-container">
-       
-        <div class="footer-bottom">
+    <div slot="footer" class="wa-stack wa-align-items-center">
           <p>&copy; Moffitt Companies. All rights reserved. Maintained by Voilxy. Updated on January 5, {{ "" | year }}. View the <a href="/changelog">changelog</a>.</p>
         </div>
       </div>

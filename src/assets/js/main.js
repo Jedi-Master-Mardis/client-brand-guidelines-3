@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
   setupTreeItemClickHandlers();
   // Setup anchor link animations
   setupAnchorAnimations();
+  // Convert heading anchor links to copy buttons
+  convertHeadingAnchorsToCopyButtons();
 });
 
 /**
@@ -461,5 +463,66 @@ function animateTargetHeading(hash) {
   requestAnimationFrame(() => {
     animation.play = true;
   });
+}
+
+/**
+ * Convert heading anchor links to copy buttons
+ */
+function convertHeadingAnchorsToCopyButtons() {
+  // Wait for wa-copy-button component to be available
+  const initConversion = () => {
+    // Handle h1 copy button (already a copy button, just needs value set)
+    const h1CopyButton = document.getElementById('h1-copy-button');
+    if (h1CopyButton) {
+      const hash = h1CopyButton.getAttribute('data-hash');
+      if (hash) {
+        const urlToCopy = window.location.origin + window.location.pathname + '#' + hash;
+        h1CopyButton.setAttribute('value', urlToCopy);
+      }
+    }
+    
+    // Find all heading anchor links (markdown-generated h2-h6)
+    const anchorLinks = document.querySelectorAll('a.heading-anchor');
+    
+    anchorLinks.forEach(anchor => {
+      // Skip if already converted
+      if (anchor.tagName === 'WA-COPY-BUTTON') return;
+      
+      // Get the full URL to copy
+      const href = anchor.getAttribute('href');
+      let urlToCopy;
+      
+      if (href && href.startsWith('#')) {
+        // Relative hash link - construct full URL
+        urlToCopy = window.location.origin + window.location.pathname + href;
+      } else if (href) {
+        // Absolute or relative URL
+        urlToCopy = new URL(href, window.location.href).href;
+      } else {
+        // Fallback to current page URL
+        urlToCopy = window.location.href;
+      }
+      
+      // Create copy button
+      const copyButton = document.createElement('wa-copy-button');
+      copyButton.setAttribute('value', urlToCopy);
+      copyButton.setAttribute('size', 'small');
+      copyButton.className = 'heading-anchor';
+      copyButton.setAttribute('copy-label', 'Copy link');
+      copyButton.setAttribute('success-label', 'Copied!');
+      
+      // Replace the anchor link with the copy button
+      anchor.parentNode.replaceChild(copyButton, anchor);
+    });
+  };
+  
+  if (customElements.get('wa-copy-button')) {
+    initConversion();
+  } else {
+    // Wait for component to load
+    window.addEventListener('load', () => {
+      setTimeout(initConversion, 100);
+    });
+  }
 }
 

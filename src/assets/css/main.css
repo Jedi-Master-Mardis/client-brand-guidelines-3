@@ -132,7 +132,6 @@ wa-page::part(menu) {
 
 /* Navigation Footer Styles */
 wa-page::part(navigation-footer) {
-
   border-top: 1px solid var(--wa-color-surface-border);
   padding: 0;
   position: sticky;
@@ -141,11 +140,11 @@ wa-page::part(navigation-footer) {
 }
 
 .sidebar-nav-footer {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 0;
   padding: 0;
-
   border-top: 1px solid var(--wa-color-surface-border);
 }
 
@@ -156,13 +155,8 @@ wa-page::part(navigation-footer) {
   text-decoration: none;
   border-radius: 0;
   transition: all 0.2s;
-  border-bottom: 1px solid var(--wa-color-surface-border);
-
 }
 
-.sidebar-nav-footer a:last-child {
-  border-bottom: none;
-}
 
 .sidebar-nav-footer a:hover {
   background-color: var(--wa-color-surface-lowered);
@@ -249,22 +243,26 @@ wa-page::part(main-content) {
   scroll-margin-top: calc(var(--wa-page-header-height, var(--header-height, 64px)) + var(--wa-page-subheader-height, 0px) + 1rem);
 }
 
-.page-header h1 .heading-anchor {
+.page-header h1 .heading-anchor,
+.page-header h1 wa-copy-button.heading-anchor {
   margin-left: 0.5rem;
   opacity: 0;
   transition: opacity 0.2s;
-  text-decoration: none;
-  color: var(--wa-color-text-normal);
-  font-weight: normal;
-
+  vertical-align: middle;
 }
 
-.page-header h1:hover .heading-anchor {
+.page-header h1:hover .heading-anchor,
+.page-header h1:hover wa-copy-button.heading-anchor {
   opacity: 1;
 }
 
-.page-header h1 .heading-anchor:hover {
+.page-header h1 .heading-anchor::part(button),
+.page-header h1 wa-copy-button.heading-anchor::part(button) {
   color: var(--wa-color-text-normal);
+  padding: 0.25rem;
+  min-width: auto;
+  width: auto;
+  height: auto;
 }
 
 .page-subtitle {
@@ -291,32 +289,63 @@ wa-page::part(main-content) {
 }
 
 .page-content h2 .heading-anchor,
+.page-content h2 wa-copy-button.heading-anchor,
 .page-content h3 .heading-anchor,
+.page-content h3 wa-copy-button.heading-anchor,
 .page-content h4 .heading-anchor,
+.page-content h4 wa-copy-button.heading-anchor,
 .page-content h5 .heading-anchor,
-.page-content h6 .heading-anchor {
+.page-content h5 wa-copy-button.heading-anchor,
+.page-content h6 .heading-anchor,
+.page-content h6 wa-copy-button.heading-anchor {
   margin-left: 0.5rem;
   opacity: 0;
   transition: opacity 0.2s;
-  text-decoration: none;
-  color: var(--wa-color-neutral-60);
-  font-weight: normal;
-
+  vertical-align: middle;
 }
 
 .page-content h2:hover .heading-anchor,
+.page-content h2:hover wa-copy-button.heading-anchor,
 .page-content h3:hover .heading-anchor,
+.page-content h3:hover wa-copy-button.heading-anchor,
 .page-content h4:hover .heading-anchor,
+.page-content h4:hover wa-copy-button.heading-anchor,
 .page-content h5:hover .heading-anchor,
-.page-content h6:hover .heading-anchor {
+.page-content h5:hover wa-copy-button.heading-anchor,
+.page-content h6:hover .heading-anchor,
+.page-content h6:hover wa-copy-button.heading-anchor {
   opacity: 1;
 }
 
-.page-content h2 .heading-anchor:hover,
-.page-content h3 .heading-anchor:hover,
-.page-content h4 .heading-anchor:hover,
-.page-content h5 .heading-anchor:hover,
-.page-content h6 .heading-anchor:hover {
+.page-content h2 .heading-anchor::part(button),
+.page-content h2 wa-copy-button.heading-anchor::part(button),
+.page-content h3 .heading-anchor::part(button),
+.page-content h3 wa-copy-button.heading-anchor::part(button),
+.page-content h4 .heading-anchor::part(button),
+.page-content h4 wa-copy-button.heading-anchor::part(button),
+.page-content h5 .heading-anchor::part(button),
+.page-content h5 wa-copy-button.heading-anchor::part(button),
+.page-content h6 .heading-anchor::part(button),
+.page-content h6 wa-copy-button.heading-anchor::part(button) {
+  color: var(--wa-color-text-quiet);
+  padding: 0.25rem;
+  min-width: auto;
+  width: auto;
+  height: auto;
+  background: transparent;
+  border: none;
+}
+
+.page-content h2 .heading-anchor::part(button):hover,
+.page-content h2 wa-copy-button.heading-anchor::part(button):hover,
+.page-content h3 .heading-anchor::part(button):hover,
+.page-content h3 wa-copy-button.heading-anchor::part(button):hover,
+.page-content h4 .heading-anchor::part(button):hover,
+.page-content h4 wa-copy-button.heading-anchor::part(button):hover,
+.page-content h5 .heading-anchor::part(button):hover,
+.page-content h5 wa-copy-button.heading-anchor::part(button):hover,
+.page-content h6 .heading-anchor::part(button):hover,
+.page-content h6 wa-copy-button.heading-anchor::part(button):hover {
   color: var(--wa-color-brand-60);
 }
 
@@ -417,76 +446,18 @@ wa-page::part(main-content) {
 wa-page::part(footer) {
   background-color: var(--wa-color-surface-default);
   border-top: 1px solid var(--wa-color-surface-border);
-  padding: 3rem 0 1.5rem 0;
+  padding: 0 var(--wa-space-2xl);
   align-items: center;
   justify-content: center;
 }
 
-.site-footer {
-  max-width: var(--content-max-width);
-  margin: 0 auto;
-  padding: 0 1.5rem;
-  align-items: center;
-  justify-content: center;
-}
 
-.footer-content {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 2rem;
-  margin-bottom: 2rem;
-}
-
-.footer-section h3,
-.footer-section h4 {
-  margin: 0 0 1rem 0;
-  font-weight: 600;
-  color: var(--wa-color-text-normal);
-}
-
-.footer-section p {
-  margin: 0 0 1rem 0;
-  color: var(--wa-color-neutral-40);
-
-}
-
-.footer-section ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.footer-section ul li {
-  margin: 0.5rem 0;
-}
-
-.footer-section ul li a {
-  color: var(--wa-color-neutral-40);
-  text-decoration: none;
-
-}
-
-.footer-section ul li a:hover {
-  color: var(--wa-color-brand-60);
-}
-
-.footer-bottom {
-
-
-  text-align: center;
-}
-
-.footer-bottom p {
-  margin: 0;
-  color: var(--wa-color-neutral-50);
-}
 
 /* Responsive Design */
 @media (max-width: 768px) {
   wa-page::part(main-content) {
     padding: 1rem;
   }
-
 
 }
 
