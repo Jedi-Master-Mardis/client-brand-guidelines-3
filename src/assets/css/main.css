@@ -132,7 +132,7 @@ wa-page::part(menu) {
 
 /* Navigation Footer Styles */
 wa-page::part(navigation-footer) {
-  background-color: ;
+
   border-top: 1px solid var(--wa-color-surface-border);
   padding: 0;
   position: sticky;
@@ -145,7 +145,7 @@ wa-page::part(navigation-footer) {
   flex-direction: column;
   gap: 0;
   padding: 0;
-  background-color: ;
+
   border-top: 1px solid var(--wa-color-surface-border);
 }
 
@@ -157,7 +157,7 @@ wa-page::part(navigation-footer) {
   border-radius: 0;
   transition: all 0.2s;
   border-bottom: 1px solid var(--wa-color-surface-border);
-  background-color: ;
+
 }
 
 .sidebar-nav-footer a:last-child {
