@@ -40,9 +40,9 @@
 
 /* Base Styles */
 :root {
-  --header-height: 64px;
-  --sidebar-width: 280px;
-  --content-max-width: 960px;
+  --header-height: var(--wa-space-4xl); /* 64px */
+  --sidebar-width: 280px; /* Custom width, no direct token */
+  --content-max-width: 960px; /* Custom max-width, no direct token */
 }
 
 /* Let Web Awesome handle surface colors through its theme system */
@@ -61,7 +61,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  line-height: 1.6;
+  line-height: var(--wa-line-height-normal);
   color: var(--wa-color-text-normal);
   background-color: var(--wa-color-surface-default);
 }
@@ -82,15 +82,15 @@ wa-page::part(header) {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 1.5rem;
-  border-bottom: 1px solid var(--wa-color-surface-border);
+  padding: 0 var(--wa-space-l);
+  border-bottom: var(--wa-border-width-m) var(--wa-border-style) var(--wa-color-surface-border);
   background-color: var(--wa-color-surface-default);
   margin: 0 auto;
   width: 100%;
 }
 
 wa-page::part(subheader) {
-  padding: 0 1.5rem;
+  padding: 0 var(--wa-space-l);
   max-width: var(--content-max-width);
   margin: 0 auto;
   width: 100%;
@@ -98,12 +98,12 @@ wa-page::part(subheader) {
 
 
 .header-breadcrumb {
-  padding: 0.5rem 0;
+  padding: var(--wa-space-xs) 0;
 }
 
 .logo {
   font-size: var(--wa-font-size-2xl);
-  font-weight: 600;
+  font-weight: var(--wa-font-weight-semibold);
   text-decoration: none;
   color: var(--wa-color-text-normal);
   white-space: nowrap;
@@ -125,14 +125,14 @@ wa-page::part(menu) {
 }
 
 .sidebar-nav {
-  padding: 1rem 0;
+  padding: var(--wa-space-m) 0;
   overflow-y: auto;
   height: 100%;
 }
 
 /* Navigation Footer Styles */
 wa-page::part(navigation-footer) {
-  border-top: 1px solid var(--wa-color-surface-border);
+  border-top: var(--wa-border-width-m) var(--wa-border-style) var(--wa-color-surface-border);
   padding: 0;
   position: sticky;
   bottom: 0;
@@ -145,15 +145,15 @@ wa-page::part(navigation-footer) {
   flex-direction: column;
   gap: 0;
   padding: 0;
-  border-top: 1px solid var(--wa-color-surface-border);
+  border-top: var(--wa-border-width-m) var(--wa-border-style) var(--wa-color-surface-border);
 }
 
 .sidebar-nav-footer a {
   display: block;
-  padding: 0.75rem 1rem;
+  padding: var(--wa-space-s) var(--wa-space-m);
   color: var(--wa-color-text-normal);
   text-decoration: none;
-  border-radius: 0;
+  border-radius: var(--wa-border-radius-square);
   transition: all 0.2s;
 }
 
@@ -167,21 +167,21 @@ wa-page::part(navigation-footer) {
 .sidebar-nav-footer a:active {
   background-color: var(--wa-color-surface-lowered);
   color: var(--wa-color-text-normal);
-  font-weight: 600;
+  font-weight: var(--wa-font-weight-semibold);
 }
 
 .sidebar-nav wa-tree {
   display: block;
-  --indent-guide-width: 2px;
+  --indent-guide-width: var(--wa-border-width-m);
   --indent-guide-color: var(--wa-color-neutral-80);
-  --indent-guide-style: solid;
-  --indent-guide-offset: 0.5rem;
+  --indent-guide-style: var(--wa-border-style);
+  --indent-guide-offset: var(--wa-space-xs);
 }
 
 /* Style tree item links */
 .sidebar-nav wa-tree-item a {
   display: block;
-  padding: 0.5rem 1rem;
+  padding: var(--wa-space-xs) var(--wa-space-m);
   color: var(--wa-color-text-normal);
   text-decoration: none;
   border-radius: var(--wa-border-radius-m);
@@ -197,55 +197,53 @@ wa-page::part(navigation-footer) {
 /* Only style the direct link, not links in child tree items */
 .sidebar-nav wa-tree-item[selected] > a {
   color: var(--wa-color-text-normal);
-  font-weight: 700;
+  font-weight: var(--wa-font-weight-bold);
 }
 
 /* Main Content Styles */
 wa-page::part(main-content) {
   max-width: 100%;
   margin: 0;
-  padding: 2rem 1.5rem;
+  padding: var(--wa-space-xl) var(--wa-space-l);
 }
 
 /* Page Content Styles */
 .page-content {
   max-width: var(--content-max-width);
   margin: 0 auto;
-  padding: 0 0 4rem 0;
+  padding: 0 0 var(--wa-space-4xl) 0;
 }
 
 .page-header {
-  margin-bottom: 2.5rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 1px solid var(--wa-color-surface-border);
+  margin-bottom: var(--wa-space-2xl);
+  padding-bottom: var(--wa-space-l);
+  border-bottom: var(--wa-border-width-m) var(--wa-border-style) var(--wa-color-surface-border);
 }
 
 .page-category {
   display: inline-block;
-  padding: 0.25rem 0.75rem;
+  padding: var(--wa-space-2xs) var(--wa-space-s);
   background-color: var(--wa-color-surface-lowered);
   color: var(--wa-color-text-normal);
   border-radius: var(--wa-border-radius-s);
-
-  font-weight: 500;
-  margin-bottom: 1rem;
+  font-weight: var(--wa-font-weight-semibold);
+  margin-bottom: var(--wa-space-m);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
 .page-header h1 {
-
-  font-weight: 700;
-  line-height: 1.2;
-  margin: 0 0 0.5rem 0;
+  font-weight: var(--wa-font-weight-bold);
+  line-height: var(--wa-line-height-condensed);
+  margin: 0 0 var(--wa-space-xs) 0;
   color: var(--wa-color-text-normal);
   position: relative;
-  scroll-margin-top: calc(var(--wa-page-header-height, var(--header-height, 64px)) + var(--wa-page-subheader-height, 0px) + 1rem);
+  scroll-margin-top: calc(var(--wa-page-header-height, var(--header-height, var(--wa-space-4xl))) + var(--wa-page-subheader-height, 0px) + var(--wa-space-m));
 }
 
 .page-header h1 .heading-anchor,
 .page-header h1 wa-copy-button.heading-anchor {
-  margin-left: 0.5rem;
+  margin-left: var(--wa-space-xs);
   opacity: 0;
   transition: opacity 0.2s;
   vertical-align: middle;
@@ -259,7 +257,7 @@ wa-page::part(main-content) {
 .page-header h1 .heading-anchor::part(button),
 .page-header h1 wa-copy-button.heading-anchor::part(button) {
   color: var(--wa-color-text-normal);
-  padding: 0.25rem;
+  padding: var(--wa-space-2xs);
   min-width: auto;
   width: auto;
   height: auto;
@@ -273,14 +271,13 @@ wa-page::part(main-content) {
 
 /* Content Typography */
 .page-content h2 {
-
-  font-weight: 600;
-  margin: 2.5rem 0 1rem 0;
+  font-weight: var(--wa-font-weight-semibold);
+  margin: var(--wa-space-2xl) 0 var(--wa-space-m) 0;
   color: var(--wa-color-text-normal);
-  padding-top: 1rem;
-  border-top: 1px solid var(--wa-color-surface-border);
+  padding-top: var(--wa-space-m);
+  border-top: var(--wa-border-width-m) var(--wa-border-style) var(--wa-color-surface-border);
   position: relative;
-  scroll-margin-top: calc(var(--wa-page-header-height, var(--header-height, 64px)) + var(--wa-page-subheader-height, 0px) + 1rem);
+  scroll-margin-top: calc(var(--wa-page-header-height, var(--header-height, var(--wa-space-4xl))) + var(--wa-page-subheader-height, 0px) + var(--wa-space-m));
 }
 
 .page-content h2:first-of-type {
@@ -298,7 +295,7 @@ wa-page::part(main-content) {
 .page-content h5 wa-copy-button.heading-anchor,
 .page-content h6 .heading-anchor,
 .page-content h6 wa-copy-button.heading-anchor {
-  margin-left: 0.5rem;
+  margin-left: var(--wa-space-xs);
   opacity: 0;
   transition: opacity 0.2s;
   vertical-align: middle;
@@ -328,7 +325,7 @@ wa-page::part(main-content) {
 .page-content h6 .heading-anchor::part(button),
 .page-content h6 wa-copy-button.heading-anchor::part(button) {
   color: var(--wa-color-text-quiet);
-  padding: 0.25rem;
+  padding: var(--wa-space-2xs);
   min-width: auto;
   width: auto;
   height: auto;
@@ -362,7 +359,7 @@ wa-page::part(main-content) {
 /* Ensure h5 and h6 also have proper scroll margin */
 .page-content h5,
 .page-content h6 {
-  scroll-margin-top: calc(var(--wa-page-header-height, var(--header-height, 64px)) + var(--wa-page-subheader-height, 0px) + 1rem);
+  scroll-margin-top: calc(var(--wa-page-header-height, var(--header-height, var(--wa-space-4xl))) + var(--wa-page-subheader-height, 0px) + var(--wa-space-m));
   position: relative;
 }
 
@@ -373,35 +370,35 @@ wa-page::part(main-content) {
 }
 
 .page-content h3 {
-  font-weight: 600;
-  margin: 2rem 0 0.75rem 0;
+  font-weight: var(--wa-font-weight-semibold);
+  margin: var(--wa-space-xl) 0 var(--wa-space-s) 0;
   color: var(--wa-color-text-normal);
   position: relative;
-  scroll-margin-top: calc(var(--wa-page-header-height, var(--header-height, 64px)) + var(--wa-page-subheader-height, 0px) + 1rem);
+  scroll-margin-top: calc(var(--wa-page-header-height, var(--header-height, var(--wa-space-4xl))) + var(--wa-page-subheader-height, 0px) + var(--wa-space-m));
 }
 
 .page-content h4 {
-  font-weight: 600;
-  margin: 1.5rem 0 0.5rem 0;
+  font-weight: var(--wa-font-weight-semibold);
+  margin: var(--wa-space-l) 0 var(--wa-space-xs) 0;
   color: var(--wa-color-text-normal);
   position: relative;
-  scroll-margin-top: calc(var(--wa-page-header-height, var(--header-height, 64px)) + var(--wa-page-subheader-height, 0px) + 1rem);
+  scroll-margin-top: calc(var(--wa-page-header-height, var(--header-height, var(--wa-space-4xl))) + var(--wa-page-subheader-height, 0px) + var(--wa-space-m));
 }
 
 .page-content p {
-  margin: 0 0 1.25rem 0;
+  margin: 0 0 var(--wa-content-spacing) 0;
   color: var(--wa-color-text-normal);
 }
 
 .page-content ul,
 .page-content ol {
-  margin: 0 0 1.25rem 0;
-  padding-left: 1.5rem;
+  margin: 0 0 var(--wa-content-spacing) 0;
+  padding-left: var(--wa-space-l);
   color: var(--wa-color-text-normal);
 }
 
 .page-content li {
-  margin: 0.5rem 0;
+  margin: var(--wa-space-xs) 0;
 }
 
 .page-content a {
@@ -415,7 +412,7 @@ wa-page::part(main-content) {
 
 .page-content code {
   background-color: var(--wa-color-surface-lowered);
-  padding: 0.125rem 0.375rem;
+  padding: var(--wa-space-3xs) var(--wa-space-s);
   border-radius: var(--wa-border-radius-s);
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
   color: var(--wa-color-text-normal);
@@ -423,10 +420,10 @@ wa-page::part(main-content) {
 
 .page-content pre {
   background-color: var(--wa-color-surface-lowered);
-  padding: 1rem;
+  padding: var(--wa-space-m);
   border-radius: var(--wa-border-radius-m);
   overflow-x: auto;
-  margin: 1.25rem 0;
+  margin: var(--wa-content-spacing) 0;
 }
 
 .page-content pre code {
@@ -435,17 +432,17 @@ wa-page::part(main-content) {
 }
 
 .page-content blockquote {
-  border-left: 4px solid var(--wa-color-brand-50);
-  padding-left: 1rem;
-  margin: 1.25rem 0;
-  color: var(--wa-color-neutral-40);
+  border-left: var(--wa-border-width-l) var(--wa-border-style) var(--wa-color-brand-50);
+  padding-left: var(--wa-space-m);
+  margin: var(--wa-content-spacing) 0;
+  color: var(--wa-color-text-quiet);
   font-style: italic;
 }
 
 /* Footer Styles */
 wa-page::part(footer) {
   background-color: var(--wa-color-surface-default);
-  border-top: 1px solid var(--wa-color-surface-border);
+  border-top: var(--wa-border-width-m) var(--wa-border-style) var(--wa-color-surface-border);
   padding: 0 var(--wa-space-2xl);
   align-items: center;
   justify-content: center;
@@ -456,19 +453,18 @@ wa-page::part(footer) {
 /* Responsive Design */
 @media (max-width: 768px) {
   wa-page::part(main-content) {
-    padding: 1rem;
+    padding: var(--wa-space-m);
   }
-
 }
 
 
 /* Component Showcase Styles */
 .component-showcase {
-  margin: 2rem 0;
-  padding: 1.5rem;
+  margin: var(--wa-space-xl) 0;
+  padding: var(--wa-space-l);
   background-color: var(--wa-color-surface-default);
   border-radius: var(--wa-border-radius-l);
-  border: 1px solid var(--wa-color-surface-border);
+  border: var(--wa-border-width-m) var(--wa-border-style) var(--wa-color-surface-border);
 }
 
 .component-showcase h3 {
@@ -477,10 +473,10 @@ wa-page::part(footer) {
 
 /* Code Block Styles */
 .code-example {
-  margin: 1.5rem 0;
+  margin: var(--wa-space-l) 0;
 }
 
 .code-example pre {
-  margin-top: 0.5rem;
+  margin-top: var(--wa-space-xs);
 }
 
