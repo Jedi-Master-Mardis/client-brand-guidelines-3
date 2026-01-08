@@ -480,3 +480,9 @@ wa-page::part(footer) {
   margin-top: var(--wa-space-xs);
 }
 
+.horizontal-card {
+  div[slot='media'] {
+    min-width: 200px;
+
+  }
+}
